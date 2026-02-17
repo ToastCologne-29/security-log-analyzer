@@ -34,7 +34,7 @@ source venv/bin/activate
 Install required dependencies:
 
 ```bash
-pip install colorama
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -55,16 +55,20 @@ python3 -m analyzer.main --log samples/sample_auth.log --out output/report.json
 security-log-analyzer/
 │
 ├── analyzer/
-│   ├── main.py
-│   ├── parsers.py
-│   ├── detections.py
+│   ├── main.py          # Entry point for CLI tool
+│   ├── parsers.py       # Log parsing logic
+│   ├── detections.py    # Detection rules (brute-force logic)
+│   ├── report.py        # Report generation
+│   └── __init__.py
 │
 ├── samples/
-│   └── sample_auth.log
+│   └── sample_auth.log  # Example log file
 │
 ├── output/
-│   └── report.json
+│   └── report.json      # Generated analysis report
 │
+├── requirements.txt     # Python dependencies
+├── .gitignore
 └── README.md
 
 ## Example Output
