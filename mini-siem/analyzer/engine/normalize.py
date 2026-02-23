@@ -1,11 +1,16 @@
-from dataclasses import dataclass
-from datetime import datetime
-from typing import Optional
+from __future__ import annotations
 
-@dataclass
-class Event:
-    ts: datetime
-    source: str
-    event_type: str
-    ip: Optional[str] = None
-    raw: str = ""
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from typing import Any, Dict, Optional
+
+
+def ensure_utc(ts: datetime) -> datetime:
+    """
+    Force a datetime into timezone-aware UTC.
+    - If naive: assume UTC.
+    - If aware: convert to UTC.
+    """
+    if ts.tzinfo is None:
+        return ts.replace(tzinfo=timezone.utc)
+    return ts.astimezone(timezone.utc)
